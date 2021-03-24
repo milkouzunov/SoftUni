@@ -9,7 +9,7 @@ const browserTemplate = (teams) => html`<section id="browse">
     </article>
 
     <article class="layout narrow">
-        <div class="pad-small"><a href="#" class="action cta">Create Team</a></div>
+        <div class="pad-small"><a href="/createTeam" class="action cta">Create Team</a></div>
     </article>
 
    ${teams.map(teamTemplate)}

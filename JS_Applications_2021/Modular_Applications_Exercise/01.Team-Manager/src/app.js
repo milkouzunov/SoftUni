@@ -1,5 +1,6 @@
 import page from '../node_modules/page/page.mjs';
 import { render } from '../node_modules/lit-html/lit-html.js';
+import {logout} from './api/data.js';
 
 import { homePage } from './views/home.js';
 import { browserTeam } from './views/browserTeam.js';
@@ -7,19 +8,23 @@ import { teamDetails } from './views/teamDetails.js';
 import { myTeams } from './views/myTeams.js';
 import { loginPage } from './views/login.js';
 import { registerPage } from './views/register.js';
+import { createTeam } from './views/createTeam.js';
 
-
-import * as api from '../src/api/data.js';
-
-window.api = api;
 
 const main = document.querySelector('main');
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await logout();
+    setUserNav();
+    page.redirect('/');
+})
 
 
 page('/', decorateContext, homePage);
 page('/browser-team', decorateContext, browserTeam);
-page('/team-details', decorateContext, teamDetails);
-page('/my-team', decorateContext, myTeams);
+page('/team-details/:id', decorateContext, teamDetails);
+page('/my-teams', decorateContext, myTeams);
+page('/createTeam', decorateContext, createTeam);
 page('/login', decorateContext, loginPage);
 page('/register', decorateContext, registerPage);
 
