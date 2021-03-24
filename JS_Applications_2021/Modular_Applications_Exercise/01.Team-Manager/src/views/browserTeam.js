@@ -1,3 +1,4 @@
+import {loaderTemplate} from './loader.js';
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
 import {getTeams} from '../api/data.js'
@@ -21,13 +22,14 @@ const teamTemplate = (team) => html`<article class="layout">
 <div class="tm-preview">
     <h2>${team.name}</h2>
     <p>${team.description}</p>
-    <span class="details">? Members</span>
-    <div><a href=${`/details/${team._id}`} class="action">See details</a></div>
+    <span class="details">${team.memberCount} Members</span>
+    <div><a href=${`/team-details/${team._id}`} class="action">See details</a></div>
 </div>
 </article>`
 
 
 export async function browserTeam(ctx) {
+    ctx.render(loaderTemplate());
     const teams = await getTeams();
 
     ctx.render(browserTemplate(teams));

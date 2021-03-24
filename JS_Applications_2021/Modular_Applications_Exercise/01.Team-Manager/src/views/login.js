@@ -1,5 +1,7 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 import { login } from '../api/data.js'
+import { loaderTemplate } from './loader.js';
+
 
 
 const loginTemplate = (onSubmit, errorMsg) => html`<section id="login">
@@ -31,6 +33,7 @@ export async function loginPage(ctx) {
         const password = formData.get('password');
 
         try {
+            ctx.render(loaderTemplate());
             await login(email, password);
 
             ctx.setUserNav();

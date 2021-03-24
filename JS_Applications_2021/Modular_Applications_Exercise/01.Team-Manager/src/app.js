@@ -5,15 +5,17 @@ import {logout} from './api/data.js';
 import { homePage } from './views/home.js';
 import { browserTeam } from './views/browserTeam.js';
 import { teamDetails } from './views/teamDetails.js';
-import { myTeams } from './views/myTeams.js';
+import { myTeamsPage } from './views/myTeams.js';
+import { createTeam } from './views/createTeam.js';
+import { edit } from './views/edit.js';
 import { loginPage } from './views/login.js';
 import { registerPage } from './views/register.js';
-import { createTeam } from './views/createTeam.js';
 
 
 const main = document.querySelector('main');
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
+    
     await logout();
     setUserNav();
     page.redirect('/');
@@ -23,8 +25,9 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 page('/', decorateContext, homePage);
 page('/browser-team', decorateContext, browserTeam);
 page('/team-details/:id', decorateContext, teamDetails);
-page('/my-teams', decorateContext, myTeams);
+page('/my-teams', decorateContext, myTeamsPage);
 page('/createTeam', decorateContext, createTeam);
+page('/edit/:id', decorateContext, edit);
 page('/login', decorateContext, loginPage);
 page('/register', decorateContext, registerPage);
 

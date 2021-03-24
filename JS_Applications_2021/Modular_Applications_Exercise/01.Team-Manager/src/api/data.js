@@ -7,23 +7,71 @@ export const login = api.login;
 export const register = api.register;
 export const logout = api.logout;
 
+// Team Collection
 
-export async function getTeams () {
-    return await api.get(host + '/data/teams');
+export async function getTeams() {
+    const teams = await api.get(host + '/data/teams');
+    const members = await getMembers(teams.map(t => t._id));
+    teams.forEach(t => t.memberCount = members.filter(m => m.teamId == t._id).length);
+    return teams;
 }
 
-export async function getTeamById (id) {
+export async function getMyTeams() {
+    const userId = sessionStorage.getItem('userId');
+    const teamsCreated = await api.get(host + `/data/teams?where=_ownerId%3D%22${userId}%22`);
+    const teamMember = await api.get(host + `/data/members?where=_ownerId%3D%22${userId}%22%20AND%20status%3D%22member%22&load=team%3DteamId%3Ateams`);
+    const teams = teamsCreated.concat(teamMember.map(r => r.team));
+    const members = await getMembers(teams.map(t => t._id));
+    teams.forEach(t => t.memberCount = members.filter(m => m.teamId == t._id).length);
+    return teams;
+}
+
+export async function getTeamById(id) {
     return await api.get(host + '/data/teams/' + id);
 }
 
-export async function createNewTeam (team) {
-    return await api.post(host + '/data/teams', team);
+export async function createNewTeam(team) {
+    const result = await api.post(host + '/data/teams', team);
+    const request = await requestToJoin(result._id);
+    await approveMemberShip(request);
+
+    return result
 }
 
-export async function editTeam (id, team) {
+export async function editTeam(id, team) {
     return await api.put(host + '/data/teams/' + id, team);
 }
 
-export async function deleteTeam (id) {
+export async function deleteTeam(id) {
     return await api.del(host + '/data/teams/' + id);
 }
+
+export async function requestToJoin(teamId) {
+    const body = { teamId };
+    return await api.post(host + '/data/members', body);
+}
+
+//members Collection
+export async function getRequestsByTeamId(teamId) {
+    return await api.get(host + `/data/members?where=teamId%3D%22${teamId}%22&load=user%3D_ownerId%3Ausers`);
+}
+
+export async function getMembers(teamIds) {
+    const query = encodeURIComponent(`teamId IN ("${teamIds.join('", "')}") AND status="member"`)
+    return await api.get(host + `/data/members?where=${query}`)
+}
+
+
+export async function cancelMembership(requestId) {
+    return await api.del(host + '/data/members/' + requestId);
+}
+
+export async function approveMemberShip(request) {
+    const body = {
+        teamId: request.teamId,
+        status: 'member',
+    }
+
+    return await api.put(host + '/data/members/' + request._id, body);
+}
+

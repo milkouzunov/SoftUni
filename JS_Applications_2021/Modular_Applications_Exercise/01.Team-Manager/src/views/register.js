@@ -1,5 +1,7 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 import { register } from '../api/data.js';
+import { loaderTemplate } from './loader.js';
+
 
 const registerTemplate = (onSubmit, errorMsg) => html`
 <section id="register">
@@ -36,11 +38,13 @@ export async function registerPage(ctx) {
 
 
         try {
-            if(email == '' || username == '' || password == '') {
-                throw new Error ('All fields are required!');
+            ctx.render(loaderTemplate());
+
+            if (email == '' || username == '' || password == '') {
+                throw new Error('All fields are required!');
             }
-            if(password != repass) {
-                throw new Error ('Passwords don\'t match!');
+            if (password != repass) {
+                throw new Error('Passwords don\'t match!');
             }
             await register(email, username, password);
 
