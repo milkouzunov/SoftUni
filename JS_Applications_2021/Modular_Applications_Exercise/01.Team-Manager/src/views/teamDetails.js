@@ -19,6 +19,7 @@ const detailsTemplate = (team, isOwner, createControls,members, pending) => html
             <h3>Members</h3>
             <ul class="tm-members">
                 ${members.map(m => memberTemplate(m, isOwner))}
+
             </ul>
         </div>
 
@@ -33,7 +34,7 @@ const detailsTemplate = (team, isOwner, createControls,members, pending) => html
     </article>
 </section>`
 
-const memberTemplate = (request, isOwner) => html`<li>${request.user.username} ${isOwner ? html`<a @click=${request.decline} href="javascript:void(0)" class="tm-control action">Remove from team</a>` : ''}</li>`
+const memberTemplate = (request, isOwner) => html`<li>${isOwner ? request.user.username : ''} ${isOwner ? html`<a @click=${request.decline} href="javascript:void(0)" class="tm-control action">Remove from team</a>` : ''}</li>`
 
 const pendingMemberTemplate = (request) => html`
 <li>

@@ -19,7 +19,7 @@ const myTeams = (teams) => html`
         <div class=""><a href="/createTeam" class="action cta">Create Team</a></div>
     </article>
 
-    ${teams.map(teamTemplate)};
+    ${teams.map(teamTemplate)}
 
 </section>`
 

@@ -18,9 +18,12 @@ export async function getTeams() {
 
 export async function getMyTeams() {
     const userId = sessionStorage.getItem('userId');
-    const teamsCreated = await api.get(host + `/data/teams?where=_ownerId%3D%22${userId}%22`);
-    const teamMember = await api.get(host + `/data/members?where=_ownerId%3D%22${userId}%22%20AND%20status%3D%22member%22&load=team%3DteamId%3Ateams`);
-    const teams = teamsCreated.concat(teamMember.map(r => r.team));
+    const [teamsCreated, teamMember] = await Promise.all([
+        api.get(host + `/data/teams?where=_ownerId%3D%22${userId}%22`),
+        api.get(host + `/data/members?where=_ownerId%3D%22${userId}%22%20AND%20status%3D%22member%22&load=team%3DteamId%3Ateams`)
+    ])
+    
+    const teams = teamMember.map(r => r.team);            //teamsCreated.concat(teamMember.map(r => r.team));
     const members = await getMembers(teams.map(t => t._id));
     teams.forEach(t => t.memberCount = members.filter(m => m.teamId == t._id).length);
     return teams;
