@@ -1,22 +1,13 @@
 const express = require('express');
 
 const config = require('./config/config');
-const hbs = require('express-handlebars')
-
+const routes = require('./routes')
 const app = express();
 
-app.engine('hbs', hbs({
-    extname: 'hbs'
-}))
-app.set('view engine', 'hbs');
+require('./config/setupExpress')(app)
 
-app.use(express.static('public'));
-
-
-app.get('/', (req, res) => {
-    res.render('home', {layout: false});
-})
+app.use(routes);
 
 
 
-app.listen(config.PORT, () => console.log(`Server starting on port ${config.PORT}...\nhttp://localhost:${config.PORT}`))
+app.listen(config.PORT, () => console.log(`Server starting on port ${config.PORT}...\nhttp://localhost:${config.PORT}/products`))
