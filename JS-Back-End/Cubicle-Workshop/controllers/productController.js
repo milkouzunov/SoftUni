@@ -1,12 +1,16 @@
 const { Router } = require('express');
 const productService = require('../services/productService');
+const accessoryService = require('../services/accessoryService');
+
 
 const router = Router();
 
 router.get('/', (req, res) => {
-    let cubes = productService.getAll(req.query);
-    
-    res.render('home', { title: 'Cubicle', cubes});
+    productService.getAll()
+        .then(cubes => {
+            res.render('home', { title: 'Cubicle', cubes });
+        })
+        .catch(() => res.status(500).end())
 });
 
 router.get('/create', (req, res) => {
@@ -16,23 +20,56 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
     const data = req.body;
     if (data.name.trim() == '' || data.description.trim() == '' || data.imageUrl.trim() == '' || data.difficultyLevel.trim() == '') {
-        return;
+        throw new Error('All fields is required');
     }
     try {
         await productService.create(data);
         res.redirect('/products');
     } catch (err) {
-        console.log(err);
+        console.error(err);
+        res.status(500).end();
     }
-    
+
 })
+
+router.get('/about', (req, res) => {
+    res.render('about', { title: 'About Page' });
+});
 
 router.get('/details/:id', (req, res) => {
     const productId = req.params.id;
 
-    const cube = productService.getCubeById(productId);
+    productService.getByIdWithAccessories(productId)
+        .then(cube => {
+            res.render('details', { title: 'Cubicle', cube });
+        })
+        .catch(() => res.status(500).end());
 
-    res.render('details', { title: 'Cubicle', cube });
 });
+
+router.get('/:productId/attach', async (req, res) => {
+    let cube = await productService.getById(req.params.productId);
+
+    let accessories = await accessoryService.getAllbyParam({
+        "$match": {
+            "_id": { "$nin": cube.accessories }
+        }
+    },
+    {
+        "$project": {
+            _id: 1,
+            name: 1,
+        }
+    });
+
+    res.render('attachAccessory', { title: 'Attach Accessory', cube, accessories });
+})
+
+router.post('/:productId/attach', (req, res) => {
+    productService.attachAccessory(req.params.productId, req.body.accessory)
+        .then(() => res.redirect(`/products/details/${req.params.productId}`))
+        .catch(() => res.status(500).end());
+
+})
 
 module.exports = router;
