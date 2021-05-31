@@ -6,7 +6,7 @@ const accessoryService = require('../services/accessoryService');
 const router = Router();
 
 router.get('/', (req, res) => {
-    productService.getAll()
+    productService.getAll(req.query)
         .then(cubes => {
             res.render('home', { title: 'Cubicle', cubes });
         })
@@ -20,7 +20,7 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
     const data = req.body;
     if (data.name.trim() == '' || data.description.trim() == '' || data.imageUrl.trim() == '' || data.difficultyLevel.trim() == '') {
-        throw new Error('All fields is required');
+        throw new Error('All fields is required!');
     }
     try {
         await productService.create(data);
@@ -32,6 +32,29 @@ router.post('/create', async (req, res) => {
 
 })
 
+router.get('/edit/:id', (req, res) => {
+    productService.getById(req.params.id)
+        .then(cube => {
+            res.render('edit', { title: 'Edit', cube });
+        })
+        .catch(() => res.status(500).end());
+
+})
+
+router.post('/edit/:id',async (req, res) => {
+    const data = req.body;
+    if (data.name.trim() == '' || data.description.trim() == '' || data.imageUrl.trim() == '' || data.difficultyLevel.trim() == '') {
+        throw new Error('All fields is required!');
+    }
+    productService.edit(req.params.id, data)
+    .then(() => res.redirect('/products'))
+    .catch(err => {
+        const cube = req.body;
+        res.render('edit', { title: 'Edit',cube, err });
+    })
+    
+})
+
 router.get('/about', (req, res) => {
     res.render('about', { title: 'About Page' });
 });
@@ -41,11 +64,19 @@ router.get('/details/:id', (req, res) => {
 
     productService.getByIdWithAccessories(productId)
         .then(cube => {
-            res.render('details', { title: 'Cubicle', cube });
+            cube.accessories.map(a => a.productId = productId)
+            res.render('details', { title: 'Details', cube });
         })
         .catch(() => res.status(500).end());
 
 });
+
+router.post('/:productId/:accessoryId/delete', (req, res) => {
+    productService.removeAccessory(req.params.productId, req.params.accessoryId)
+    .then(() => res.redirect(`/products/details/${req.params.productId}`))
+    .catch(() => res.status(500).end())
+})
+
 
 router.get('/:productId/attach', async (req, res) => {
     let cube = await productService.getById(req.params.productId);
