@@ -56,8 +56,13 @@ async function attachAccessory(cubeId, accessoryId) {
 }
 
 async function removeAccessory (cubeId, accessoryId) {
-    return await Cube.updateOne({_id: cubeId}, {$pull: {accessories: accessoryId}});
+    let cube = await Cube.updateOne({_id: cubeId}, {$pull: {accessories: accessoryId}});
+    let accessory = await Accessory.updateOne({_id: accessoryId}, {$pull: {cubes: cubeId}});
     
+    return {
+        cube,
+        accessory
+    }
 }
 
 module.exports = {
