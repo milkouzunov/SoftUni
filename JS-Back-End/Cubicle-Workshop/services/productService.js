@@ -25,22 +25,30 @@ async function getAll(query) {
     return cube;
 }
 
-function getById(id) {
-    return Cube.findById(id).lean();
+async function getById(id) {
+    return await Cube.findById(id).lean();
 }
 
-function getByIdWithAccessories(id) {
-    return Cube.findById(id).populate('accessories').lean();
+async function getByIdWithAccessories(id) {
+    return await Cube.findById(id).populate('accessories').lean();
 }
 
-function create(data) {
-    let cube = new Cube(data);
+async function getCubeCreator (id) {
+   return await Cube.findById(id, {"createdBy": 1})
+}
+
+async function create(data) {
+    let cube = await new Cube(data);
 
     return cube.save()
 }
 
 async function edit(id, data) {
     return await Cube.updateOne({_id: id}, data);
+}
+
+async function deleteCube (id) {
+    return await Cube.deleteOne({_id: id});
 }
 
 async function attachAccessory(cubeId, accessoryId) {
@@ -69,8 +77,10 @@ module.exports = {
     getAll,
     getById,
     getByIdWithAccessories,
+    getCubeCreator,
     create,
     edit,
+    deleteCube,
     attachAccessory,
     removeAccessory
 }

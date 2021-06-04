@@ -106,7 +106,7 @@ button, main a.btn {
 }
 
 .details a.btn{
-    width: 28%;
+    width: 20%;
 }
 
 button:hover {
@@ -216,6 +216,23 @@ span.error {
     animation: fadeOut 1s forwards;
     animation-delay: 2s;
     background: #EF5542;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: normal;
+    position: relative;
+    float: right;
+    margin-top: 20px;
+    overflow: hidden;
+    display: block;
+}
+
+span.success {
+    animation: fadeOut 1s forwards;
+    animation-delay: 2s;
+    background: #34ee72;
     color: white;
     padding: 10px;
     text-align: center;

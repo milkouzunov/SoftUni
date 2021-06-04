@@ -1,4 +1,7 @@
 <main>
+  {{#if message}}
+  <span class="success">{{message}}</span>
+  {{/if}}
   <h1>Browser</h1>
   <form action="/products" method="GET">
     <input type="text" class="search" name="search" placeholder="Search...">

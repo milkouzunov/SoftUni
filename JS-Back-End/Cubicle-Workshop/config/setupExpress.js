@@ -1,6 +1,8 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 const Handlebars = require('handlebars');
+const cookieParser = require('cookie-parser');
+const auth = require('../middlewares/auth');
 
 Handlebars.registerHelper("select", function (value, options) {
     return options.fn(this)
@@ -24,4 +26,9 @@ module.exports = (app) => {
     app.use(express.static('public'));
 
     app.use(express.urlencoded({ extended: true }));
+
+    app.use(cookieParser());
+
+    app.use(auth());
+
 }
