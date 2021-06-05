@@ -4,7 +4,7 @@ const config = {
         JWT_SECRET: 'navuhodonosor'
     }, 
     production: {
-        PORT: 80,
+        PORT: 8000,
         JWT_SECRET: 'navuhodonosor'
     }
 }

@@ -5,8 +5,12 @@ const { JWT_SECRET } = require('../config/config');
 const User = require('../models/User');
 
 async function register({ username, password }) {
-    //TODO: Check if username exists
-
+    const isBusy = await User.findOne({ 'username': { '$regex': `^${username}$`, '$options': 'i' } })
+    
+    if(isBusy) {
+        throw { message: 'Username is already busy'};
+    }
+    
     let salt = await bcrypt.genSalt(10);
     let hash = await bcrypt.hash(password, salt);
 
