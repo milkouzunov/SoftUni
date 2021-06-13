@@ -4,13 +4,13 @@ const accessorySchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,
     name: {
         type: String,
+        unique: true,
         required: true,
 
     },
     imageUrl: {
         type: String,
-        required: true,
-        validate: /^https?/,
+        required: true
     },
     description: {
         type: String,

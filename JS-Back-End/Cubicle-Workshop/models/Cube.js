@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cubeSchema = new mongoose.Schema({
     name: {
         type: String,
+        unique: true,
         required: true,
 
     },
@@ -14,7 +15,6 @@ const cubeSchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: true,
-        validate: /^https?/,
     },
     difficultyLevel: {
         type: Number,
@@ -30,7 +30,8 @@ const cubeSchema = new mongoose.Schema({
     ],
     createdBy: {
        type: mongoose.Types.ObjectId,
-       ref: 'User'
+       ref: 'User',
+       required: true
     }
 });
 

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const config = require('./config/config');
+const port = process.env.PORT || 3000;
 const routes = require('./routes')
 const app = express();
 
@@ -11,4 +11,4 @@ app.use(routes);
 
 
 
-app.listen(config.PORT, () => console.log(`Server starting on port ${config.PORT}...\nhttp://localhost:${config.PORT}/products`))
+app.listen(port, () => console.log(`Server starting on port ${port}...\nhttp://localhost:${port}/products`))

@@ -7,7 +7,10 @@ module.exports = async (req, res, next) => {
             res.locals.isAuthorization = true;
         } else {
             res.locals.isAuthorization = false;
-            throw { message: 'Your not creator' }
+        }
+
+        if((req.url.includes('edit') || req.url.includes('create') || req.url.includes('attach')) && !res.locals.isAuthorization ) {
+            return res.redirect('/products');
         }
     } catch (err) {
         console.error(err)

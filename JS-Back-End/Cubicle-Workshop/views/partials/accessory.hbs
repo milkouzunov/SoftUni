@@ -3,7 +3,9 @@
     <h3>{{name}}</h3>
     <p>{{description}}</p>
     <form action="/products/{{productId}}/{{_id}}/delete" method="POST">
-        <input type="submit" value="Remove">
+        {{#if isAuth}} 
+        <input class="accessoryRemove" type="submit" value="Remove">
+        {{/if}}
         </a>
     </form>
     
