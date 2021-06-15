@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const memeService = require('../services/memeService');
 const { isAuth } = require('../middlewares/auth');
+const {check, validationResult} = require('express-validator')
 
 const router = Router();
 
@@ -9,7 +10,7 @@ router.get('/', async (req, res) => {
     const cubes = await memeService.getAll();
     res.status(200).json(cubes);
   } catch (err) {
-    res.status(403).json({ error: { message: err } });
+    res.status(400).json({ error: { message: err } });
   }
 });
 
@@ -20,7 +21,7 @@ router.get('/:id', async (req, res) => {
     const cube = await memeService.getById(id);
     res.status(200).json(cube);
   } catch (err) {
-    res.status(403).json({ error: { message: err } });
+    res.status(400).json({ error: { message: err } });
   }
 });
 
@@ -31,14 +32,30 @@ router.get('/owner/:ownerId', async (req, res) => {
     const cubes = await memeService.getByOwnerId(ownerId);
     res.status(200).json(cubes);
   } catch (err) {
-    res.status(403).json({ error: { message: err } });
+    res.status(400).json({ error: { message: err } });
   }
 });
 
-router.post('/', isAuth, async (req, res) => {
+router.post('/',  isAuth, [
+  check('title', 'Invalid title!')
+  .trim()
+  .isLength({
+    min: 6
+  }),
+  check('description', 'Invalid description!')
+  .trim()
+  .isLength({
+    min: 10
+  }),
+  check('imageUrl', 'Invalid Url!')
+  .trim()
+  .isURL({protocols: ['http', 'https']})
+], async (req, res) => {
   const { title, description, imageUrl } = req.body;
 
   try {
+    validationResult(req).throw();
+
     if (
         title.trim() == '' ||
         description.trim() == '' ||
@@ -56,15 +73,34 @@ router.post('/', isAuth, async (req, res) => {
 
     res.status(201).json({ _id: meme._id });
   } catch (err) {
-    res.status(404).json({ error: { message: err } });
+    if(err.errors) {
+      err = err.errors.map(e => e = e.msg);
+    }
+    res.status(400).json({ error: err  });
   }
 });
 
-router.put('/:id', isAuth, async (req, res) => {
+router.put('/:id', isAuth, [
+  check('title', 'Invalid title!')
+  .trim()
+  .isLength({
+    min: 6
+  }),
+  check('description', 'Invalid description!')
+  .trim()
+  .isLength({
+    min: 10
+  }),
+  check('imageUrl', 'Invalid Url!')
+  .trim()
+  .isURL({protocols: ['http', 'https']})
+], async (req, res) => {
   const { title, description, imageUrl } = req.body;
   const id = req.params.id;
 
   try {
+    validationResult(req).throw();
+
     if (
       title.trim() == '' ||
       description.trim() == '' ||
@@ -83,7 +119,10 @@ router.put('/:id', isAuth, async (req, res) => {
       message: 'resource updated successfully',
     });
   } catch (err) {
-    res.status(403).json({ error: { message: err } });
+    if(err.errors) {
+      err = err.errors.map(e => e = e.msg);
+    }
+    res.status(400).json({ error: { message: err } });
   }
 });
 
@@ -97,7 +136,7 @@ router.delete('/:id', isAuth, async (req, res) => {
       message: 'resource deleted successfully',
     });
   } catch (err) {
-    res.status(403).json({ error: { message: err } });
+    res.status(400).json({ error: { message: err } });
   }
 });
 

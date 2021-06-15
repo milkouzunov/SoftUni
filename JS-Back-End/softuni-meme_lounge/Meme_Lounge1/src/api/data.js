@@ -21,7 +21,9 @@ export async function getMemesByOwnerId (userId) {
 
 
 export async function createMeme (title, description, imageUrl) {
-    return await api.post(host + '/memes', {title, description, imageUrl});
+    let result = await api.post(host + '/memes', {title, description, imageUrl});
+    console.log(result);
+    return result;
 }
 
 export async function editMeme (id, title, description, imageUrl) {

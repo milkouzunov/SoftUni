@@ -8,8 +8,11 @@ async function request(url, options) {
         const response = await fetch(url, options);
 
         if (response.ok == false) {
-            const error = await response.json();
-            throw new Error(error.message);
+            let error = (await response.json()).error;
+            if(error.message) {
+                error = error.message;
+            }
+            throw new Error(error);
         }
 
         try {
@@ -78,12 +81,10 @@ export async function register (username, email, password, gender) {
 }
 
 export async function logout () {
-    //const result = await get (settings.host + '/auth/logout');
     
     sessionStorage.removeItem('userToken');
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('userId');
 
-    //return result;
 }
