@@ -37,10 +37,10 @@ function decorateContext(ctx, next) {
 }
 
 function setUserNav() {
-    const token = sessionStorage.getItem('authToken');
+    const token = sessionStorage.getItem('userToken');
 
     if (token != null) {
-        document.querySelector('.profile>span').textContent = `Welcome, ${sessionStorage.getItem('email')}`
+        document.querySelector('.profile>span').textContent = `Welcome, ${sessionStorage.getItem('username')}`
         document.querySelector('.user').style.display = 'block';
         document.querySelector('.guest').style.display = 'none';
         page.redirect('/allMemes');
@@ -51,10 +51,13 @@ function setUserNav() {
     }
 }
 
-async function logout () {
-    await apiLogout();
+//async 
+function logout () {
+    //await 
+    apiLogout();
+    page.redirect('/')
     setUserNav();
 }
 
-//  class="active"
+
 

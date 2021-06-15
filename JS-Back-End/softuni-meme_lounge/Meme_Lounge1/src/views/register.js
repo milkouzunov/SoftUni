@@ -34,7 +34,7 @@ const template = (onSubmit, notification) => html`
 
 export async function registerPage(ctx) {
     ctx.render(template(onSubmit));
-
+    
     async function onSubmit(ev) {
         ev.preventDefault();
 
@@ -45,7 +45,7 @@ export async function registerPage(ctx) {
         const password = formData.get('password');
         const repeatPass = formData.get('repeatPass');
         const gender = formData.get('gender');
-
+       
 
         try {
             if (username == '') {
@@ -69,7 +69,7 @@ export async function registerPage(ctx) {
             )
 
             ctx.setUserNav();
-            ctx.page.redirect('/allMemes');
+            ctx.page.redirect('/login');
 
         } catch (err) {
             ctx.render(template(onSubmit, notification(err)))

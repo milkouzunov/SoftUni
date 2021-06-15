@@ -15,7 +15,7 @@ const template = (meme, onDelete, currentUser) => html`
                 ${meme.description}
             </p>
 
-            ${currentUser === meme._ownerId ? html`
+            ${currentUser === meme.createdBy ? html`
             <a class="button warning" href="/edit/${meme._id}">Edit</a>
             <button @click=${onDelete} class="button danger">Delete</button>` : ''}
             

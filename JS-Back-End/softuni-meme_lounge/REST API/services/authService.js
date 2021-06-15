@@ -4,17 +4,17 @@ const User = require('../models/User');
 
 const jwt_secret = 'security_world!';
 
-async function register ({username, password, gender}) {
+async function register({ username, email, password, gender }) {
 
     let salt = await bcrypt.genSalt(10);
     let hash = await bcrypt.hash(password.trim(), salt);
 
-    const newUser =  new User({ username: username.trim(), password: hash, gender });
-    
+    const newUser = new User({ username: username.trim(), email, password: hash, gender });
+
     return newUser.save();
 }
 
-async function login ({username, password}) {
+async function login({ username, password }) {
     let user = await User.findOne({ username: username.trim() });
 
     if (!user) {
@@ -27,9 +27,14 @@ async function login ({username, password}) {
         throw { message: 'Wrong username or password!' };
     }
 
-    let token = jwt.sign({ _id: user._id, username: username }, jwt_secret);
+    let token = jwt.sign({ _id: user._id, username: username }, jwt_secret, { expiresIn: '2h' });
 
-    return token;
+    return {
+        token,
+        username: user.username,
+        email: user.email,
+        userId: user._id
+    };
 }
 
 module.exports = {

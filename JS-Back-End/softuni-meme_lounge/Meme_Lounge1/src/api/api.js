@@ -30,9 +30,9 @@ function getOptions(method = 'get', body) {
         headers: {}
     };
 
-    const token = sessionStorage.getItem('authToken');
+    const token = sessionStorage.getItem('userToken');
     if (token != null) {
-        options.headers['X-Authorization'] = token;
+        options.headers['Authorization'] = `Bearer ${token}`;
     }
 
     if (body) {
@@ -40,7 +40,7 @@ function getOptions(method = 'get', body) {
         options.body = JSON.stringify(body);
     }
 
-    console.log(options);
+    
     return options;
 }
 
@@ -62,36 +62,28 @@ export async function del(url) {
 
 export async function login (username, password) {
     const result = await post (settings.host + '/auth/login', {username, password});
-    
-    // sessionStorage.setItem('username', result.username);
-    // sessionStorage.setItem('email', result.email);
-    // sessionStorage.setItem('gender', result.gender);
-    // sessionStorage.setItem('authToken', result.accessToken);
-    // sessionStorage.setItem('userId', result._id);
+
+    sessionStorage.setItem('userToken', result.token);
+    sessionStorage.setItem('username', result.username);
+    sessionStorage.setItem('email', result.email);
+    sessionStorage.setItem('userId', result.userId);
 
     return result;
 }
 
 export async function register (username, email, password, gender) {
     const result = await post (settings.host + '/auth/register', {username, email, password, gender});
-    // sessionStorage.setItem('username', result.username);
-    // sessionStorage.setItem('email', result.email);
-    // sessionStorage.setItem('gender', result.gender);
-    // sessionStorage.setItem('authToken', result.accessToken);
-    // sessionStorage.setItem('userId', result._id);
 
     return result;
 }
 
 export async function logout () {
-    const result = await get (settings.host + '/auth/logout');
+    //const result = await get (settings.host + '/auth/logout');
     
-    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('userToken');
     sessionStorage.removeItem('username');
-    sessionStorage.removeItem('gender');
-    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('email');
     sessionStorage.removeItem('userId');
 
-    
-    return result;
+    //return result;
 }

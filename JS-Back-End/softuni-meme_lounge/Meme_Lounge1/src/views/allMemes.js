@@ -8,7 +8,7 @@ const template = (memes) => html`
     <h1>All Memes</h1>
     <div id="memes">
         
-        ${memes ? memes.map(memeTemplate) : html`<p class="no-memes">No memes in database.</p>`}
+        ${memes != 0 ? memes.map(memeTemplate) : html`<p class="no-memes">No memes in database.</p>`}
 
     </div>
 </section>`
@@ -28,6 +28,6 @@ const memeTemplate = (meme) => html`
 
 export async function allMemesPage(ctx) {
     const memes = await getMemes();
-    
+
     ctx.render(template(memes));
 }
