@@ -1,0 +1,21 @@
+@import 'https://use.fontawesome.com/releases/v5.15.4/css/all.css';
+p {
+    margin: 30px;
+}
+p:nth-child(1) a {
+    background-color: rgb(22, 175, 22);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+}
+
+p:nth-child(2) a {
+    background-color: #FF8C00;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+}
