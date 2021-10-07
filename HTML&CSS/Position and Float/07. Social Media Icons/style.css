@@ -1,0 +1,16 @@
+@import 'https://use.fontawesome.com/releases/v5.15.4/css/all.css';
+
+ul {
+    display: inline-block;
+}
+
+ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+a {
+    border-radius: 50%;
+    font-size: 50px;
+    margin: 10px;
+}

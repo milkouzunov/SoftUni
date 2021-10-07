@@ -1,0 +1,27 @@
+html {
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.site-title {
+    display: inline-block;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.heading-title {
+    text-transform: uppercase;
+}
+header img {
+    float: right;
+}
+blockquote {
+    float: right;
+}
+main article:nth-child(2) {
+    margin-bottom: 30px;
+}
+main article img {
+    float: left;
+    margin-right: 5px;
+}
+

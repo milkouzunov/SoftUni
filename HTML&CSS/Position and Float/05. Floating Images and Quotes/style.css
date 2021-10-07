@@ -1,0 +1,30 @@
+body {
+    background-color: rgb(238, 238, 238);
+}
+.site-title {
+    display: inline-block;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+h1, blockquote {
+    font-family: Georgia, serif;
+}
+img {
+    background-color: rgb(255, 255, 255);
+    border: 3px solid black;
+    padding: 10px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.25);
+}
+header img {
+    float: right;
+}
+blockquote {
+    float: right;
+}
+main article:nth-child(2) {
+    margin-bottom: 30px;
+}
+main article img {
+    float: left;
+    margin-right: 5px;
+}

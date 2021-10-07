@@ -1,0 +1,41 @@
+html {
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+body {
+    background-color: rgb(238, 238, 238);
+}
+img {
+    background-color: rgb(255, 255, 255);
+    border: 3px solid black;
+    padding: 10px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+aside {
+    float: right;
+    margin-left: 50px;
+}
+.site-title {
+    display: inline-block;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.heading-title {
+    text-transform: uppercase;
+}
+header img {
+    float: right;
+}
+blockquote {
+    font-family: Georgia, serif;
+    float: right;
+}
+main article:nth-child(2) {
+    margin-bottom: 30px;
+}
+main article img {
+    float: left;
+    margin-right: 5px;
+}

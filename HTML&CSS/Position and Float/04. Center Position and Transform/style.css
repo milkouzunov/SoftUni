@@ -1,0 +1,21 @@
+body {
+    background-color: rgb(238, 238, 238);
+}
+
+section.card {
+    background-color: rgb(255, 255, 255);
+}
+
+
+section div img {
+    position: absolute;
+}
+
+h1 {
+    font: 1em Georgia, serif;
+}
+
+button {
+    background-color: rgb(0, 153, 0);
+}
+
