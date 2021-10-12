@@ -4,12 +4,19 @@ body {
 
 section.card {
     background-color: rgb(255, 255, 255);
-}
-
-
-section div img {
     position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 30%;
 }
+
+section div {
+    position: relative;
+}
+ img {
+    width: 100%;
+ }
 
 h1 {
     font: 1em Georgia, serif;
