@@ -1,0 +1,36 @@
+body {
+  background-color: rgb(238, 238, 238);
+}
+.masonry {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 1000px;
+  align-content: space-around;
+  row-gap: 10px;
+}
+
+.cards-layout article {
+  background-color: rgb(255, 255, 255);
+  width: 15%;
+  border-top: 2px solid #ededed;
+  border-radius: 5px;
+}
+.cards-layout article img {
+  width: 100%;
+  border-start-end-radius: 5px;
+}
+.cards-layout article p,
+.cards-layout article h2 {
+  padding: 10px;
+}
+.more {
+  border-top: 2px solid #cacaca;
+}
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+    justify-content: center;
+}

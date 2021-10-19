@@ -1,0 +1,18 @@
+html {
+    font: 16px/1.5 Helvetica, sans-serif
+}
+h2 {
+    font-family: Georgia, serif;
+    font-size: 1em;
+    line-height: 1.2;
+}
+
+section {
+    max-width: 70vw;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

@@ -1,0 +1,65 @@
+html {
+    box-sizing: border-box;
+}
+div {
+    display: flex;
+    align-items: center;
+    max-width: 65vw;
+    margin: 0;
+}
+section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+span {
+    border: 1px solid black;
+}
+
+.notes {
+    flex-direction: column;
+}
+.week article {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.week article span {
+    margin: 0;
+    padding: 20px 20px;
+    text-align: center;
+}
+.week .workweek span:nth-child(1) {
+    flex-basis: 86%;
+    padding: 40px 50px;
+}
+.week .workweek span:nth-child(2), 
+.week .workweek span:nth-child(3),
+.week .workweek span:nth-child(4),
+.week .workweek span:nth-child(5),
+.week .workweek span:nth-child(6) {
+    flex-basis: 14%;
+    padding-right: 22px;
+}
+
+.week .weekend span:nth-child(1) {
+    flex-basis: 86%;
+    padding: 40px 50px;
+}
+.week .weekend span:nth-child(2), 
+.week .weekend span:nth-child(3) {
+    flex-basis: 44%;
+    padding-right: 22px;
+}
+.notes {
+    flex-basis: 0px;
+    margin: -2px;
+}
+.notes span{
+    flex-basis: 158px;
+    padding-right: 40px;
+    text-align: center;
+}

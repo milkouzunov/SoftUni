@@ -1,0 +1,17 @@
+body, ul, li {
+    display: flex;
+    flex-wrap: wrap;
+}
+ul {
+    justify-content: space-between;
+    row-gap: 10px;
+}
+.gallery ul li {
+    border: 5px solid black;
+    padding: 20px 5px;
+    align-content: center;
+    
+}
+.gallery ul li img {
+    height: fit-content;
+}

@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    background-color: #EEEE;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items:center;
+    justify-content: center;
+    justify-content:space-around
+}
+
+header, footer {
+   position: relative;
+   background-color: white;
+   width: 80%;
+   padding: 60px;
+   margin: 5px;
+   flex-grow: 1;
+}
+
+main,aside {
+   position: relative;
+   background-color: white;
+   flex-basis: 36%;
+    padding: 120px;
+    margin: 5px;
+}
+
+p {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
