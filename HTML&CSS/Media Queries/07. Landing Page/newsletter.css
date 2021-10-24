@@ -1,0 +1,39 @@
+.newsletter {
+    background-color: #68347B;
+    text-align: center;
+    padding: 50px 0;
+}
+.newsletter hr {
+    width: 80px;
+    border-color: black;
+    margin: 23px auto;
+}
+.newsletter form input {
+    padding: 5px 36px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+.newsletter form button {
+    padding: 5px 7px;
+    font-weight: bold;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+.newsletter h1 {
+    color: #FFFFFF;
+}
+@media screen and (max-width: 500px) {
+    .newsletter {
+        font-size: 10px;
+    }
+    .newsletter form {
+        text-align: center;
+    }
+    .newsletter form input {
+        width: 55%;
+    }
+    .newsletter form button {
+        width: 40%;
+        font-size: 12px;
+    }
+}

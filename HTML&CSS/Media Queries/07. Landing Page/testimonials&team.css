@@ -1,0 +1,52 @@
+.out-team, .testimonials {
+    text-align: center;
+}
+.out-team h1, .testimonials h1 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding: 25px 30px;
+    font-size: 30px;
+}
+.out-team hr, .testimonials hr {
+    padding-top: 0;
+    margin-top: 0;
+    width: 80px;
+    border-color: black;
+}
+.out-team .team, .testimonials .team {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.testimonials .team {
+    color: #7C7C7C;
+}
+.out-team .team .profile, .testimonials .team .testimonial {
+    width: 30%;
+}
+.out-team .team .description, .testimonials .team .description {
+    padding: 0 30px;
+}
+
+@media screen and (max-width: 1000px) {
+    .out-team .team .profile, .testimonials .team .testimonial {
+        width: 40%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .out-team .team, .testimonials .team {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .out-team .team .profile, .testimonials .team .testimonial {
+        text-align: center;
+        font-size: 13px;
+    }
+    .out-team .team .profile img, .testimonials .team .testimonial img {
+        width: 100%;
+    }
+    .out-team .team .profile .description, .testimonials .team .testimonial .description {
+        padding: 0;
+    }
+}

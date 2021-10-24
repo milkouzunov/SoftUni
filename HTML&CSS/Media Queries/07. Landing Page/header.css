@@ -1,0 +1,50 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .title {
+    width: 300px;
+}
+header .title h1 {
+    margin: 0;
+    font-size: 45px;
+    color: #7E0F83;
+}
+header .title p {
+    margin: 0;
+    font-size: 13px;
+    color: #ACB1AE;
+}
+header nav ul li{
+    display: inline-flex;
+    list-style: none;
+    margin: 0 10px;
+}
+header nav ul li a {
+    text-decoration: none;
+    color: #615854;
+}
+.btn-menu {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .btn-menu {
+        display: block;
+        border: none;
+        background: none;
+        font-size: 15px;
+    }
+    header nav {
+        display: none;
+    }
+}
+@media screen and (max-width: 500px) {
+    header .title h1{
+        font-size: 25px;
+    }
+    header .title p {
+        font-size: 7px;
+    }
+}

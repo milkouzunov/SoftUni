@@ -1,0 +1,30 @@
+.layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+.layout .content {
+    flex-basis: 50%;
+    margin-right: 5px;
+}
+.layout button {
+    background: none;
+    padding: 3px 10px;
+    border-color: black;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.layout button:hover {
+    background-color: black;
+    color: #FFFF;
+}
+.layout i{
+    font-size: 150px;
+}
+
+@media screen and (max-width: 500px) {
+    .layout button {
+        font-size: 10px;
+    }
+}

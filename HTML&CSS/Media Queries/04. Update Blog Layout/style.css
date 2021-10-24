@@ -1,0 +1,133 @@
+@import 'https://use.fontawesome.com/releases/v5.15.4/css/all.css';
+
+body {
+    background-color: rgb(238, 238, 238);
+}
+img {
+    background-color: rgb(255, 255, 255);
+}
+blockquote {
+    font-family: Georgia, serif;
+}
+a {
+    color: rgb(0, 153, 0);
+}
+h1 {
+    font-family: Georgia, serif;
+}
+img {
+    height: fit-content;
+    border: 3px solid black;
+    padding: 5px;
+}
+.page {
+    display: flex;
+    flex-wrap: wrap;
+}
+header {
+    border-bottom: 3px solid black;
+    flex-basis: 100%;
+    margin-top: 30px;
+    margin: 10px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    border-bottom: 2px solid black;
+}
+nav {
+    margin: 0;
+}
+nav ul {
+    background-color: white;
+    display: flex;
+    border-radius: 10px;
+    padding: 0;
+}
+
+
+nav ul li {
+    list-style: none;
+    background-color: black;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    
+}
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+}
+
+.btn {
+    display: none;
+}
+
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+section {
+    width: 70%;
+}
+.first-article {
+    display: flex;
+}
+.first-article .content {
+    flex-basis: 70%;
+    margin-right: 10px;
+}
+
+blockquote {
+    border-left: 2px solid black;
+    padding-left: 10px;
+    width: 50%;
+    margin: 0;
+}
+.third-article img {
+    float: left;
+    margin-right: 10px;
+}
+
+.third-article .content {
+    width: 50%;
+}
+
+.third-article .content p{
+    margin: 5px 0;
+}
+
+/* tablet */
+@media screen and (max-width: 1000px) {
+    header, header nav ul {
+        flex-direction: column;
+    }
+    nav {
+        border-top: 2px solid black;
+    }
+    nav ul {
+        margin: 1px -20px;
+    }
+    nav ul li {
+        text-align: center;
+    }
+    .btn {
+        display: block;
+        border: none;
+        margin-bottom: 10px;
+    }
+    aside {
+        flex-basis: 100%;
+    }
+}
+/* mobile */
+@media screen and (max-width: 600px) {
+    h1 {
+        text-align: center;
+    }
+    nav ul li {
+        text-align: center;
+    }
+}
